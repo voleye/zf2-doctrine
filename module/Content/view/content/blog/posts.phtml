@@ -1,0 +1,27 @@
+<?php
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+?>
+<div class="one-column">
+    <h1><?php echo $this->translate('Blog'); ?></h1>
+    <section class="section-wide blog-posts" role="main">
+        <?php
+       // $query = new WP_Query(array('ignore_sticky_posts' => 1, 'paged' => get_query_var('paged') ?: 1));
+        if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <article class="post" id="post-<?php the_ID(); ?>" itemscope itemtype="http://schema.org/Article">
+                <header class="post-header">
+                    <h2 class="post-title entry-title" itemprop="name"><a href="<?php the_permalink(); ?>" rel="<?php esc_attr_e('bookmark'); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+                    <section class="header-meta">
+                        <section class="left post-category"><?php the_category(', '); ?></section>
+                        <time datetime="<?php the_time(get_option('date_format')); ?>" itemprop="datePublished" pubdate class="post-date updated"><?php the_time(get_option('date_format')) ?></time>
+                    </section>
+                </header>
+                <article class="post-content">
+                    <?php if (has_post_thumbnail()) { the_post_thumbnail('post_thumb', array('class' => 'aligncenter')); } ?>
+                    <?php the_content(); ?>
+                </article><!-- .post-content -->
+            </article><!-- .article -->
+        <?php endwhile; ?>
+            <?php echo $this->render('content/blog/pages'); ?>
+        <?php endif; ?>
+    </section>
+</div>

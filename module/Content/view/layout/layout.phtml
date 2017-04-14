@@ -1,0 +1,70 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->translate('Safety Car — курсы безопасного/контраварийного вождения'))->setSeparator(' / ')->setAutoEscape(false) ?>
+        <?php $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0'); ?>
+        <?php echo $this->headMeta(); ?>
+        <!-- Le styles -->
+        <?php echo $this->headLink()
+                        ->appendStylesheet($this->basePath() . '/css/scrollyeah.css?d=3')
+                        ->appendStylesheet($this->basePath() . '/js/bootstrap-3.1.1/css/bootstrap.min.css')
+                        ->appendStylesheet($this->basePath() . '/js/bootstrap-3.1.1/css/bootstrap-theme.min.css')
+                        ->appendStylesheet($this->basePath() . '/js/slick/slick/slick.css')
+                        ->appendStylesheet($this->basePath() . '/css/frontend.css')
+                    ;
+        ?>
+        <!-- Scripts -->
+        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                                      ->appendFile($this->basePath() . '/js/require.js', 'text/javascript', array('data-main' => $this->basePath() . '/js/loader.js'))
+                                      ;
+        ?>
+        <meta property="fb:admins" content="100001780876028">
+    </head>
+    <body class="page-min-width" itemscope itemtype="http://schema.org/WebPage">
+        <?php echo $this->render('layout/google-analytics'); ?>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="header">
+            <div class="one-column" itemscope itemtype="http://schema.org/Organization">
+                <strong class="logo">
+                    <a href="<?php echo $this->basePath('/'); ?>" title="<?php echo $this->translate('Safety Car — Водительское мастерство'); ?>"><img itemprop="logo" src="<?php echo $this->basePath() . '/images/logo-sc.png'; ?>" alt="<?php echo $this->translate('Safety Car — Водительское мастерство'); ?>"  title="<?php echo $this->translate('Safety Car — Водительское мастерство'); ?>" /><span itemprop="name"><?php echo $this->translate('Safety Car — Водительское мастерство'); ?></span></a>
+                </strong>
+                <div class="menu">
+                    <?php echo $this->navigation('navigation.frontend.main')->menu(); ?>
+                </div>
+                <div class="right-block">
+                    <div class="item phone" itemprop="telephone">(063) 764-5447</div>
+                    <div class="item trial-lesson"><?php echo $this->render('layout/request-form.phtml'); ?></div>
+                </div>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+        <div class="content">
+            <div class="one-column">
+                <?php echo $this->navigation('navigation.frontend.breadcrumbs')->breadcrumbs()->setSeparator(' / ')->setPartial('layout/breadcrumbs'); ?>
+            </div>
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+        <div class="clear-both">&nbsp;</div>
+        <footer id="main-footer" class="page-min-width">
+            <div class="one-column">
+                <?php echo $this->block('footer_links'); ?>
+                <div class="clear-both" style="border-bottom:1px solid #3A3A3A; height: 50px; margin-top:20px; margin-bottom:10px;"></div>
+                <div class="footer-bottom">
+                    <span class="left">&copy; safety-car, 2014</span>
+                    <span class="right">Дизайн &mdash; Евгений Банных</span>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

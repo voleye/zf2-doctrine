@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    $(function() {
+        $(".main-menu ul li").hover(function() {
+            $(this).find('div').toggle();
+        });
+    });
+</script>
+<div class="main-menu">
+    <ul class="left">
+    <?php foreach ($this->container as $item):?>
+        <li>
+            <?php if ($item->getPages()): ?>
+            <?php echo $item->getLabel(); ?>
+            <div>
+                <ul>
+                <?php foreach ($item->getPages() as $childItem): ?>
+                <li><a href="<?php echo $childItem->getRoute(); ?>" title="<?php echo $childItem->getLabel(); ?>"><?php echo $childItem->getLabel(); ?></a></li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php else: ?>
+            <a href="<?php echo $item->getHref()?>" title="<?php echo $item->getLabel(); ?>"><?php echo $item->getLabel(); ?></a>
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</div>

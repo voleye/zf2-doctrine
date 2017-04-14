@@ -1,0 +1,8 @@
+nbproject
+._*
+.~lock.*
+.idea
+.project
+.settings
+composer.lock
+vendor/*

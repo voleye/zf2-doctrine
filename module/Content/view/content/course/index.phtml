@@ -1,0 +1,25 @@
+<?php
+
+/** @var \Content\Model\Service $service */
+$service = $this->service;
+?>
+
+<div class="one-column course">
+    <div>
+        <h1 class="left"><?php echo $service->getTitle(); ?></h1>
+    </div>
+    <div class="clear-both">&nbsp;</div>
+    <div class="left description course-description">
+        <?php echo $service->getDescription(); ?>
+    </div>
+    <div class="left">
+        <div>
+            <a data-toggle="modal" class="btn btn-primary btn-lg btn-pink" data-target="#myModal" href="<?php echo $this->url('root/lesson-request'); ?>" title="Подать заявку">Подать заявку</a>
+        </div>
+        <br />
+        <ul class="social-links">
+            <li><div class="fb-like" data-href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></li>
+        </ul>
+    </div>
+    <div class="clear-both">&nbsp;</div>
+</div>

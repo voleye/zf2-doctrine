@@ -1,0 +1,24 @@
+<?php if ($this->services): ?>
+<div class="item left">
+    <div><strong>Курсы</strong></div>
+    <ul>
+        <?php foreach ($this->services as $service): ?>
+        <li><a href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" title="<?php echo $service->getTitle(); ?>"><?php echo $service->getTitle(); ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
+<div class="item left">
+    <div><strong>Контакты</strong></div>
+    <ul>
+        <li></li>
+        <li><a href="mailto:safetycarukraine@gmail.com" title="safetycarukraine@gmail.com" target="_top">safetycarukraine@gmail.com</a></li>
+    </ul>
+</div>
+<div class="item left">
+    <ul class="social-links">
+        <li><a href="http://vk.com/safetycarukraine" title="vk.com" class="vk-icon" target="_blank">vk.com</a></li>
+        <li><a href="http://instagram.com/safetycarukraine" title="Instagram" class="instagram-icon" target="_blank">Instagram</a></li>
+        <li><a href="https://plus.google.com/110294223758487731117" rel="publisher" class="gplus-icon" target="_blank">Google+</a></li>
+    </ul>
+</div>

@@ -1,0 +1,46 @@
+<?php
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$this->form->prepare();
+?>
+<script type="text/javascript">
+    $(function() {
+        var isXmlHttpRequest = <?php echo $this->isXmlHttpRequest; ?>;
+        var urlForm          = '<?php echo $this->form->getAttribute('action'); ?>';
+        var form             = $('form#<?php echo $this->form->getAttribute('name'); ?>');
+
+        form.submit(function() {
+            if (isXmlHttpRequest == 0) {
+                return true;
+            }
+            $.post(urlForm, $(this).serialize(), function(response) {
+                $('.modal-body').html(response.content);
+                $('.btn-submit').hide();
+            }, 'json');
+            return false;
+        });
+    });
+</script>
+<?php if (!$this->isXmlHttpRequest): ?>
+<div class="one-column">
+    <?php endif; ?>
+    <div class="modal-header">
+        <h2><?php echo $this->escapeHtml($this->translate('Lesson request')); ?></h2>
+    </div>
+    <?php echo $this->form()->openTag($this->form); ?>
+    <div class="modal-body">
+        <?php echo $this->formRow($this->form->get('name')); ?>
+        <?php echo $this->formRow($this->form->get('phone')); ?>
+        <br /><?php echo $this->formRow($this->form->get('email')); ?>
+        <br /><?php echo $this->formRow($this->form->get('comment')); ?>
+    </div>
+    <div class="modal-footer">
+        <?php if ($this->isXmlHttpRequest): ?>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <?php endif; ?>
+        <input type="submit" class="btn btn-primary btn-submit" value="Отправить заявку" />
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+    <?php if (!$this->isXmlHttpRequest): ?>
+</div>
+<?php endif; ?>

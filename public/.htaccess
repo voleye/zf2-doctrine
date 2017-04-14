@@ -1,0 +1,25 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+<IfModule mod_expires.c>
+ExpiresActive on
+#ExpiresDefault A604800
+
+#ExpiresByType text/html "access plus 10 minutes"
+#ExpiresByType text/plain A2592000
+
+ExpiresByType image/gif A604800
+ExpiresByType image/jpeg A604800
+ExpiresByType image/png A604800
+ExpiresByType image/ico A604800
+
+ExpiresByType application/x-font-woff A604800
+
+ExpiresByType text/css A604800
+ExpiresByType text/javascript A604800
+ExpiresByType application/javascript A604800
+</IfModule>

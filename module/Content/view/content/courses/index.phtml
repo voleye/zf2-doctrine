@@ -1,0 +1,21 @@
+<?php if ($this->services): ?>
+<div class="one-column courses-list">
+    <h1><?php echo $this->translate('Курсы') ?></h1>
+    <ul class="align-left">
+        <?php foreach ($this->services as $service): ?>
+            <li class="left">
+                <a href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" title="<?php echo $service->getTitle();?>"><img src="<?php echo $this->basePath($service->getBaseImage()); ?>" alt="<?php echo $service->getTitle();?>" title="<?php echo $service->getTitle();?>" /></a>
+                <div>
+                    <h2><a href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" title="<?php echo $service->getTitle();?>"><?php echo $service->getTitle(); ?></a></h2>
+                    <?php echo $service->getShortDescription(); ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <div class="clear-both">&nbsp;</div>
+</div>
+<?php endif; ?>
+
+
+
+

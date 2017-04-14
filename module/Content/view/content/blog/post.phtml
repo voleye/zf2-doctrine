@@ -1,0 +1,47 @@
+<?php
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+?>
+<?php
+/** @var \WP_Post $post */
+$post = $this->post;
+?>
+<div class="one-column blog-post">
+    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+    <article class="post" id="post-<?php the_ID(); ?>" itemscope itemtype="http://schema.org/Article">
+        <header class="post-header">
+            <h1 class="post-title entry-title" itemprop="name"><?php the_title(); ?></h1>
+            <section class="header-meta">
+                <section class="left post-category"><?php the_category(', '); ?></section>
+                <time datetime="<?php the_time(get_option('date_format')); ?>" itemprop="datePublished" pubdate class="post-date updated"><?php the_time(get_option('date_format')) ?></time>
+            </section>
+        </header>
+        <article>
+            <div class="post-content">
+                <?php the_content(); ?>
+            </div>
+            <?php //zinnia_get_link_pages() ?>
+            <section class="post-author-bio">
+                <?php echo get_avatar(get_the_author_meta('email'), 64); ?>
+                <?php echo get_the_author_meta('description'); ?>
+            </section>
+            <p><?php the_tags(); ?></p>
+            <br />
+            <div class="left share">
+                <ul class="social-links">
+                    <li><div class="fb-like" data-href="<?php echo $this->pageUri; ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></li>
+                </ul>
+            </div>
+            <div class="clear-both">&nbsp;</div>
+            <br />
+            <footer class="post-footer">
+                <ul class="footer-navi">
+                    <?php previous_post_link('<li class="previous" rel="prev">&laquo; %link</li>'); ?>
+                    <?php next_post_link('<li class="next" rel="next">%link &raquo;</li>'); ?>
+                </ul>
+            </footer><!-- .post-footer -->
+            <div class="clear-both">&nbsp;</div>
+            <div class="fb-comments" data-href="<?php echo $this->pageUri; ?>" data-numposts="5" data-colorscheme="light"></div>
+        </article><!-- .post-content -->
+    </article><!-- .article -->
+    <?php endwhile; endif; ?>
+</div>

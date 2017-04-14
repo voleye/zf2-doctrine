@@ -1,0 +1,41 @@
+<section class="comment-box">
+    <?php
+    if (post_password_required()) {?>
+        <p class="nocomments">This post is password protected. Enter the password to view comments.</p>
+        <?php return; } ?>
+
+    <!-- You can start editing here. -->
+    <?php if (have_comments()): ?>
+        <section class="comment-pagination">
+            <section class="alignleft"><?php previous_comments_link() ?></section>
+            <section class="alignright"><?php next_comments_link() ?></section>
+        </section>
+        <?php if (!empty($comments_by_type['comment'])) { ?>
+            <h4 id="comments"><?php comments_number(); ?> on <?php the_title(); ?></h4>
+            <ol class="commentlist">
+                <?php wp_list_comments('type=comment'); ?>
+            </ol>
+        <?php } if (!empty( $comments_by_type['pings'])) { ?>
+            <h4 id="comments"><?php echo count($wp_query->comments_by_type['pings']); ?>Pingbacks &amp; Trackbacks on <?php the_title(); ?></h4>
+            <ol class="commentlist">
+                <?php wp_list_comments('type=pingback'); ?>
+            </ol>
+        <?php } ?>
+        <section class="comment-pagination">
+            <section class="alignleft"><?php previous_comments_link() ?></section>
+            <section class="alignright"><?php next_comments_link() ?></section>
+        </section>
+    <?php else : // this is displayed if there are no comments so far ?>
+        <?php if ('open' == $post->comment_status): ?>
+        <?php else : // comments are closed ?>
+            <?php if (is_page()) : else : ?>
+                <p class="nocomments">Comments are closed</p>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
+    <?php if ('open' == $post->comment_status): ?>
+        <section id="respond">
+            <?php comment_form(); ?>
+        </section>
+    <?php endif; // if you delete this the sky will fall on your head ?>
+</section>

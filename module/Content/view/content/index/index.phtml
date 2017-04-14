@@ -1,0 +1,82 @@
+<?php
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+?>
+<?php if ($this->services): ?>
+<div class="slider courses-slider">
+    <?php foreach ($this->services as $service): ?>
+        <?php if ($service->getSlideImage()): ?>
+            <div>
+                <div class="image">
+                    <img src="<?php echo $this->basePath($service->getSlideImage()); ?>">
+                </div>
+                <div class="slider-popup align-center">
+                    <strong>Курс</strong>
+                    <strong class="title"><?php echo $service->getTitle(); ?></strong>
+                    <div class="description">
+                        <?php echo $service->getSlideDescription(); ?>
+                    </div>
+                    <br />
+                    <a href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" title="<?php echo $service->getTitle(); ?>" class="btn btn-primary btn-lg btn-pink">Подробнее</a>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+<script>
+    require(["slick/slick/slick.min"], function($) {
+        jQuery('.courses-slider').show();
+        jQuery('.courses-slider').slick({
+            dots: true
+        });
+    });
+</script>
+<?php endif; ?>
+<?php if ($this->services): ?>
+<div class="courses-short-container">
+    <div class="one-column align-center">
+        <h2><?php echo $this->translate('Курсы') ?></h2>
+        <ul class="align-left">
+            <?php foreach ($this->services as $service): ?>
+            <li>
+                <div>
+                    <a href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" title="<?php echo $service->getTitle();?>"><img src="<?php echo $this->basePath($service->getPreviewImage()); ?>" title="<?php echo $service->getTitle();?>" alt="<?php echo $service->getTitle();?>" /></a>
+                    <div>
+                        <h3><a href="<?php echo $this->url('root/course', array('name' => $service->getUrlPath()))?>" title="<?php echo $service->getTitle();?>"><?php echo $service->getTitle(); ?></a></h3>
+                        <?php echo $service->getShortDescription(); ?>
+                    </div>
+                </div>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <div class="clear-both">&nbsp;</div>
+    </div>
+</div>
+<?php endif; ?>
+
+<div class="one-column align-center">
+    <h2><?php echo $this->translate('Процесс обучения') ?></h2>
+    <div class="align-left two-column-first">
+        <h3><?php echo $this->translate('Индивидуальные занятия'); ?></h3>
+        <p>Мы проводим индивидуальные занятия для желающих максимально быстро и эффективно повысить свое мастерство</p>
+    </div>
+    <div class="align-left two-column-second">
+        <h3><?php echo $this->translate('Групповые занятия'); ?></h3>
+        <p>Мы хотим, чтобы обучение было доступно широкому кругу желающих. По этому мы предлагаем групповые занятия, которые дешевле по стоимости.</p>
+        <p>С нами интересно - мы поводим соревнования между учениками, придумываем интересные и неординарные задания для отработки приемов контраварийного вождения, строим фигуры автослалома и посещаем различные автомобильные мероприятия.</p>
+    </div>
+    <div class="clear-both"></div>
+</div>
+<div class="instagram-panel">
+    <div class="front-img item">
+        <a href="http://instagram.com/safetycarukraine" title="<?php echo $this->translate('Следите за нами в Instagram'); ?>" target="_blank"><img style="display: block; width:306px; height: 306px;" src="/images/follow-us-instagram.png" /></a>
+    </div>
+    <div class="scrollyeah">
+        <?php foreach ($this->instagramData as $item):?>
+        <div class="item">
+            <?php $image = $item->images->low_resolution; ?>
+            <a target="_blank" title="<?php echo $this->translate('See in Instagram')?>" href="<?php echo $item->link; ?>"><img src="<?php echo $image->url; ?>" width="<?php echo $image->width;?>" height="<?php echo $image->height;?>" <?php if (isset($item->caption)): ?>title="<?php echo $item->caption->text; ?>" alt="<?php echo $item->caption->text; ?>"<?php endif; ?> /></a>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<div class="clear-both">&nbsp;</div>
